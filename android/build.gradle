@@ -1,6 +1,8 @@
 buildscript {
     ext.kotlin_version = '1.7.10'
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
         google()
         mavenCentral()
     }
@@ -13,6 +15,8 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
         google()
         mavenCentral()
     }
@@ -20,7 +24,11 @@ allprojects {
 
 rootProject.buildDir = '../build'
 subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    def rootPath = rootProject.projectDir.toPath().toAbsolutePath().normalize()
+    def projectPath = project.projectDir.toPath().toAbsolutePath().normalize()
+    if (projectPath.startsWith(rootPath)) {
+        project.buildDir = "${rootProject.buildDir}/${project.name}"
+    }
 }
 subprojects {
     project.evaluationDependsOn(':app')
