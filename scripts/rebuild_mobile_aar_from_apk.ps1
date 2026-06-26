@@ -418,15 +418,6 @@ public interface error {
 }
 '@
 
-    Write-TextFile (Join-Path $SrcDir "go/mobile/gojni/R.java") @'
-package go.mobile.gojni;
-
-public final class R {
-    private R() {
-    }
-}
-'@
-
     Write-TextFile (Join-Path $SrcDir "mobile/EventNotifyHandler.java") @'
 package mobile;
 
